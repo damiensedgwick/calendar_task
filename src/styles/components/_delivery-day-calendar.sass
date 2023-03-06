@@ -1,0 +1,98 @@
+.delivery-day-calendar
+  padding: 1rem
+  max-width: 640px
+  background: $warning-orange-100 // temp
+
+  p
+    margin: 0 0 1rem 0
+    padding: 0
+    text-align: center
+    font-family: $font-family-headings
+
+  .react-calendar
+    width: 300px
+
+    .react-calendar__month-view
+      > div
+        > div
+          display: flex
+          flex-direction: column
+
+          .react-calendar__tile
+            color: $brand-red-400
+            border: $brand-red-400 1px solid
+            transition: all 1s ease
+            font-weight: normal
+
+          .react-calendar__tile--active
+            color: $brand-white
+            background: $brand-red-400
+
+          .react-calendar__month-view__weekdays
+            width: 90%
+            margin: 0 0 1rem 0
+
+            abbr
+              text-decoration: none
+
+          .react-calendar__month-view__days
+            margin: 0 0 1rem 0
+            width: 90%
+            display: flex
+            flex-direction: row
+            flex-wrap: wrap
+            justify-content: center
+            align-items: center
+            align-content: center
+
+          .react-calendar__month-view__days__day
+            width: calc(100% / 7)
+            flex: 1
+            display: flex
+            justify-content: center
+            align-items: center
+            font-size: 1em
+            margin: -1px 0 0 -1px
+            height: 0
+            padding-bottom: calc(100% / 10)
+            position: relative
+
+            &.disabled
+              cursor: not-allowed
+              color: $grey-400
+              background-color: $grey-200
+              border: $grey-200 1px solid
+
+            abbr
+              position: absolute
+              top: 50%
+              left: 50%
+              transform: translate(-50%, -50%)
+
+          .react-calendar__month-view__days__day--neighboringMonth
+            opacity: 0
+
+  div
+    display: flex
+    flex-direction: row
+    flex-wrap: nowrap
+    justify-content: center
+    align-items: center
+    align-content: center
+
+    button
+      padding: 0.5rem 1rem
+      margin: 0 0.5rem
+      text-transform: uppercase
+      background: none
+      border: none
+      font-family: inherit
+      font-weight: bold
+      color: $grey-500
+      cursor: pointer
+
+      &:nth-of-type(2)
+        color: $brand-red-400
+        border: $brand-red-400 1px solid
+        box-shadow: 2px 2px 2px 0 $grey-400
+

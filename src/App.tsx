@@ -7,7 +7,11 @@ export const App = () => {
 
   return (
     <div className="app">
-      <DeliveryDayCard showModal={showModal} toggleModal={toggleModal} />
+      <DeliveryDayCard
+        showModal={showModal}
+        toggleModal={toggleModal}
+        deliveryDayDate={deliveryDayDate}
+      />
 
       {showModal && (
         <Modal>

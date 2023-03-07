@@ -2,6 +2,7 @@ import { animated, useSpring } from "@react-spring/web";
 import { useDeliveryDayDate } from "../hooks";
 import { Calendar as ReactCalendar } from "react-calendar";
 import { getDisabledTiles, formatShortWeekday, tileClassName } from "utils";
+import { useState } from "react";
 
 interface DeliveryDayCalenderProps {
   toggleModal: () => void;
@@ -14,6 +15,7 @@ export const DeliveryDayCalendar = ({
   deliveryDayDate,
   updateDeliveryDayDate,
 }: DeliveryDayCalenderProps) => {
+  const [newDeliveryDate, setNewDeliveryDate] = useState<Date>(deliveryDayDate);
   const { currentMonth, currentYear } = useDeliveryDayDate();
 
   const springs = useSpring({
@@ -31,8 +33,8 @@ export const DeliveryDayCalendar = ({
       <p>{currentMonth + " " + currentYear}</p>
 
       <ReactCalendar
-        value={deliveryDayDate}
-        onChange={(e: Date) => updateDeliveryDayDate(e)}
+        value={newDeliveryDate ? newDeliveryDate : deliveryDayDate}
+        onChange={(e: Date) => setNewDeliveryDate(e)}
         showNavigation={false}
         formatShortWeekday={formatShortWeekday}
         tileDisabled={getDisabledTiles}
@@ -45,7 +47,7 @@ export const DeliveryDayCalendar = ({
         </button>
         <button
           onClick={() => {
-            updateDeliveryDayDate(deliveryDayDate);
+            updateDeliveryDayDate(newDeliveryDate);
             toggleModal();
           }}
         >

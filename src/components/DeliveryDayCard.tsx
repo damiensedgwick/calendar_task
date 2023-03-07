@@ -12,8 +12,6 @@ export const DeliveryDayCard = ({
   toggleModal,
   deliveryDayDate,
 }: DeliveryDayCardProps) => {
-  console.log(deliveryDayDate);
-
   return (
     <div className="delivery-day-card">
       <div className="card-header">

@@ -1,54 +1,25 @@
 import { animated, useSpring } from "@react-spring/web";
 import { useDeliveryDayDate } from "../hooks";
 import { Calendar as ReactCalendar } from "react-calendar";
+import { getDisabledTiles, formatShortWeekday, tileClassName } from "utils";
 
 interface DeliveryDayCalenderProps {
   toggleModal: () => void;
+  deliveryDayDate: Date;
+  updateDeliveryDayDate: (date: Date) => void;
 }
 
 export const DeliveryDayCalendar = ({
   toggleModal,
+  deliveryDayDate,
+  updateDeliveryDayDate,
 }: DeliveryDayCalenderProps) => {
-  const { deliveryDayDate, currentMonth, currentYear, updateDeliveryDayDate } =
-    useDeliveryDayDate();
+  const { currentMonth, currentYear } = useDeliveryDayDate();
 
   const springs = useSpring({
     from: { y: 100 },
     to: { y: -100 },
   });
-
-  const formatShortWeekday = (locale: string, date: Date) => {
-    return date.toLocaleDateString(locale, { weekday: "short" })[0];
-  };
-
-  const tileDisabled = ({ date }: { date: Date }) => {
-    switch (date.getDay()) {
-      case 0:
-        return false;
-      case 1:
-        return false;
-      case 2:
-        return true;
-      case 3:
-        return false;
-      case 4:
-        return false;
-      case 5:
-        return true;
-      case 6:
-        return true;
-      default:
-        return false;
-    }
-  };
-
-  const tileClassName = ({ date }: { date: Date }) => {
-    if (tileDisabled({ date })) {
-      return "disabled";
-    }
-
-    return null;
-  };
 
   return (
     <animated.div
@@ -64,7 +35,7 @@ export const DeliveryDayCalendar = ({
         onChange={(e: Date) => updateDeliveryDayDate(e)}
         showNavigation={false}
         formatShortWeekday={formatShortWeekday}
-        tileDisabled={tileDisabled}
+        tileDisabled={getDisabledTiles}
         tileClassName={tileClassName}
       />
 
@@ -72,7 +43,14 @@ export const DeliveryDayCalendar = ({
         <button onClick={toggleModal}>
           cancel, <br /> don't change
         </button>
-        <button>change date</button>
+        <button
+          onClick={() => {
+            updateDeliveryDayDate(deliveryDayDate);
+            toggleModal();
+          }}
+        >
+          change date
+        </button>
       </div>
     </animated.div>
   );

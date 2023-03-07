@@ -1,8 +1,9 @@
 import { DeliveryDayCalendar, DeliveryDayCard, Modal } from "components";
-import { useModal } from "hooks";
+import { useDeliveryDayDate, useModal } from "hooks";
 
 export const App = () => {
   const { showModal, toggleModal } = useModal();
+  const { deliveryDayDate, updateDeliveryDayDate } = useDeliveryDayDate();
 
   return (
     <div className="app">
@@ -10,7 +11,11 @@ export const App = () => {
 
       {showModal && (
         <Modal>
-          <DeliveryDayCalendar toggleModal={toggleModal} />
+          <DeliveryDayCalendar
+            toggleModal={toggleModal}
+            deliveryDayDate={deliveryDayDate}
+            updateDeliveryDayDate={updateDeliveryDayDate}
+          />
         </Modal>
       )}
     </div>
